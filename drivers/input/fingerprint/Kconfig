@@ -1,17 +1,9 @@
-#
-# Fingerprint driver configuration
-#
-menuconfig INPUT_FINGERPRINT
-	bool "Fingerprints"
+config INPUT_FINGERPRINT
+	tristate "Fingerprint driver support"
 	help
-	  Say Y here, and a list of supported fingerprints will be displayed.
-	  This option doesn't affect the kernel.
+	  Say Y here to enable fingerprint driver support.
 
-	  If unsure, say Y.
-
-if INPUT_FINGERPRINT
-
-source "drivers/input/fingerprint/goodix_ta/Kconfig"
-source "drivers/input/fingerprint/fpc_tee/Kconfig"
-
-endif
+config FINGERPRINT_GOODIX
+	tristate "Goodix fingerprint support"
+	help
+	  Say Y here to enable Goodix fingerprint driver support.
