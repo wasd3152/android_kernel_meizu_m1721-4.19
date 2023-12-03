@@ -51,7 +51,7 @@
 static DECLARE_BITMAP(minors, N_SPI_MINORS);
 static LIST_HEAD(device_list);
 static DEFINE_MUTEX(device_list_lock);
-static struct wakeup_source fp_wakeup_source;
+static struct wakeup_source *fp_wakeup_source;
 static struct gf_dev gf;
 static int pid = 0;
 static struct sock *nl_sk = NULL;
@@ -466,7 +466,7 @@ static irqreturn_t gf_irq(int irq, void *handle)
 {
 	char temp = GF_NET_EVENT_IRQ;
 	gf_info("enter\n");
-	__pm_wakeup_event(&fp_wakeup_source, WAKEUP_HOLD_TIME);
+	__pm_wakeup_event(fp_wakeup_source, WAKEUP_HOLD_TIME);
 	sendnlmsg(&temp);
 
 	return IRQ_HANDLED;
@@ -668,7 +668,7 @@ static int gf_probe(struct spi_device *spi)
 
 	gf_dev->irq = gf_irq_num(gf_dev);
 
-	wakeup_source_init(&fp_wakeup_source, "fp_wakeup_source");
+	fp_wakeup_source = wakeup_source_register(NULL, "fp_wakeup_source");
 	status = request_threaded_irq(gf_dev->irq, NULL, gf_irq,
 			IRQF_TRIGGER_RISING | IRQF_ONESHOT,
 			"gf", gf_dev);
@@ -709,7 +709,7 @@ static int gf_remove(struct spi_device *spi)
 {
 	struct gf_dev *gf_dev = &gf;
 
-	wakeup_source_trash(&fp_wakeup_source);
+	wakeup_source_unregister(fp_wakeup_source);
 	/* make sure ops on existing fds can abort cleanly */
 	if (gf_dev->irq)
 		free_irq(gf_dev->irq, gf_dev);
