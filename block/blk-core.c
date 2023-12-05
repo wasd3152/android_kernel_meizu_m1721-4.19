@@ -2131,7 +2131,7 @@ out_unlock:
 
 static void handle_bad_sector(struct bio *bio, sector_t maxsector)
 {
-#ifndef CONFIG_MACH_XIAOMI_OXYGEN
+#ifndef CONFIG_MACH_MEIZU_M1721
 	char b[BDEVNAME_SIZE];
 
 	printk(KERN_INFO "attempt to access beyond end of device\n");

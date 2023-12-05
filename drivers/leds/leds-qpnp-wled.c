@@ -2012,7 +2012,7 @@ static int qpnp_wled_config(struct qpnp_wled *wled)
 	/* Configure the SWITCHING FREQ register */
 	if (wled->switch_freq_khz == 1600)
 		reg = QPNP_WLED_SWITCH_FREQ_1600_KHZ_CODE;
-#ifdef CONFIG_MACH_XIAOMI_OXYGEN
+#ifdef CONFIG_MACH_MEIZU_M1721
 	else if (wled->switch_freq_khz == QPNP_WLED_SWITCH_FREQ_600_KHZ)
 		reg = QPNP_WLED_SWITCH_FREQ_600_KHZ_CODE;
 #endif

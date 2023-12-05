@@ -430,11 +430,11 @@ config ARCH_ZYNQMP
 	help
 	  This enables support for Xilinx ZynqMP Family
 
-config MACH_XIAOMI_OXYGEN
-	bool  "XIAOMI platform"
+config MACH_MEIZU_M1721
+	bool  "MEIZU platform"
 	depends on ARCH_MSM8953
 	help
-	  Support for the Xiaomi Max 2 platform
+	  Support for the Meizu M6 Note platform
 	  which is based on QCOM MSM8953 chipset.
 
 endmenu
