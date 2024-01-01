@@ -352,8 +352,8 @@
             vdd-supply = <&pm8953_l10>;
             vcc-supply = <&pm8953_l6>;
 
-            aw2013,red {
-                aw2013,name = "mx-led";
+            aw2013,white {
+                aw2013,name = "white";
                 aw2013,id = <0x0>;
                 aw2013,max-brightness = <0xff>;
                 aw2013,max-current = <0x3>;
